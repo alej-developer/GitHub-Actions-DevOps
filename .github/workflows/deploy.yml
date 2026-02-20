@@ -1,0 +1,19 @@
+name: Deploy to Heroku
+on:
+  push:
+    branches:
+      -main
+jobs:
+  build-and-deploy
+    runs-on: ubuntu-lastest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install
+      - uses: akhileshns/herolku-deploy@v3.12.12
+        with:
+          heroky_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "GitHub-actions-DevOps-app"
+          heroku_email: "DevOps-GitHub@gmail.com"
